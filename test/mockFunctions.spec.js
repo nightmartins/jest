@@ -14,8 +14,26 @@ O foco aqui é a utilização de mock functions.
 ATENÇÃO!!! Edite apenas este arquivo. Não altere os arquivos da pasta 'src'.
 */
 
+jest.mock('.../src/mockFunctions');
+
 describe('3 - Verifica as funções e os mocks', () => {
-  // Crie suas mock functions aqui
+  mockFunctions.multiply.mockImplementation((a, b) => a * b);
+  mockFunctions.power.mockImplementation((a, b) => a ** b);
+  mockFunctions.add.mockImplementation((a, b) => a + b);
+  mockFunctions.subtract.mockImplementation((a, b) => a - b);
+  mockFunctions.divide.mockImplementation((a, b) => a / b);
+  // referência para calcular a função factorial: https://www.javascriptprogressivo.net/2018/12/Calculo-Fatorial-WHILE-FOR-Lacos-JS.html
+  mockFunctions.factorial.mockImplementation((a) => {
+    if (a === 0 || a === 1) {
+      return 1;
+    }
+    const count = 1;
+    let result = 1;
+    while (count <= a) {
+      result *= count;
+    }
+    return result;
+  });
 
   test('testa função add', () => {
     expect(mockFunctions.add(1, 2)).toEqual(3);
